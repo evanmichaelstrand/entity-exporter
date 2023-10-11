@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { AppRoot } from "@dynatrace/strato-components-preview";
 import { BrowserRouter } from "react-router-dom";
-import { App } from "./app/App";
+import { App } from "./app/pages/App";
 
 ReactDOM.render(
   <AppRoot>

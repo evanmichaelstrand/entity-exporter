@@ -1,6 +1,6 @@
 import React from "react";
-import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph } from "@dynatrace/strato-components-preview";
-import { getEntities } from "../functions/getEntities";
+import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput } from "@dynatrace/strato-components-preview";
+//import { getEntities } from "../functions/getEntities";
 
 
 //TODO: Add scopes to api, then assign api to get entities call
@@ -9,20 +9,17 @@ import { getEntities } from "../functions/getEntities";
 
 export const App = () => {
   return (
-    <Page>
-      <Page.Header>
-        <AppHeader>
-          <AppName />
-        </AppHeader>
-      </Page.Header>
-      <Page.Main>
-        <Flex padding={16} flexDirection="column">
-          <Heading level={2}>Hello Dynatrace!</Heading>
-          <Paragraph>
-            Edit <Code>src/app/App.tsx</Code> and save to reload.
-          </Paragraph>
-        </Flex>
-      </Page.Main>
-    </Page>
+    <>
+    <Flex flexDirection="column" alignItems="center" padding={32}>
+        <Heading>Dynatrace Non-Named Biz Event Impact Analysis App</Heading>
+        <Paragraph>
+        This app is designed to assist a new App developer better understand the basics of the application 
+        </Paragraph>
+        <Paragraph>To run the app please enter an email address below</Paragraph>
+        <FormField label="">
+          <TextInput placeholder="john.lagona@dtinside.com" />
+        </FormField>
+      </Flex>
+   </>
   );
 };
