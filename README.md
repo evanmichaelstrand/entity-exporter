@@ -1,5 +1,7 @@
 # Getting Started with your Dynatrace App
 
+THIS IS NOT AN OFFICIAL DYNATRACE PRODUCT
+
 This project was bootstrapped with Dynatrace App Toolkit.
 
 It uses React in combination with TypeScript, to provide great developer experience.
