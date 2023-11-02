@@ -11,108 +11,57 @@ var count = 1;
 
 //https://italonascimento.github.io/applying-a-timeout-to-your-promises/
 
-/*const entity = {
-  name: string;
-} */
+var apiData: {host: string, hostGroupName: string, ipAddress: string, monitoringMode: string, osType: string}[] = [];
 
-/*interface apiData{
-  data:Object[]
-}*/
-
-var apiData: {host: string, traffic: number, memoryTotal: number, timestamp: number}[] = [];
-
-apiData.push({"host": "test", "traffic": 213.4, "memoryTotal": 100, "timestamp": 99})
-console.log(apiData)
+apiData.push({"host": "test", "hostGroupName": "test group", "ipAddress": "100.100", "monitoringMode": "yes", "osType": "linux/windows"})
 
 
 const config: Object = {
   entitySelector: "type(HOST)",
-  from: "now-365d",
+  from: "now-2h",
   to: "now",
-  fields: "-fromRelationships, +properties.ipAddress",
+  fields: "-fromRelationships, +properties.ipAddress, +properties.hostGroupName, +properties.monitoringMode, +properties.osType",
 }
 
 monitoredEntitiesClient.getEntities(config)
 .then((response) => {
   response.entities?.forEach(entity => {
-    console.log(entity.displayName);
+    console.log(entity.properties?.hostGroupName);
+    apiData.push({"host": String(entity.displayName), "hostGroupName": String(entity.properties?.hostGroupName), "ipAddress": String(entity.properties?.ipAddress), "monitoringMode": String(entity.properties?.monitoringMode), "osType": String(entity.properties?.osType)});
   })
 })
 .catch((response) => {
   console.log("error:", response)
 })
 
+console.log(apiData)
+
 const cols: TableColumn[] = [
-  {
-    header: 'Host Info',
-    id: 'hostid',
-    columns: [
       {
         header: 'Host',
         accessor: 'host',
         minWidth: 150,
       },
       {
-        header: 'Timestamp',
-        accessor: 'timestamp',
+        header: 'Host Group',
+        accessor: 'hostGroupName',
         minWidth: 200,
       },
-    ],
-  },
-  {
-    header: 'Performance Information',
-    id: 'performanceInfo',
-    columns: [
       {
-        header: 'Traffic',
-        accessor: 'traffic',
+        header: 'IP Address',
+        accessor: 'ipAddress',
         autoWidth: true,
       },
       {
-        header: 'Memory Total',
-        accessor: 'memoryTotal',
+        header: 'Monitoring Mode',
+        accessor: 'monitoringMode',
         autoWidth: true,
       },
-    ],
-  },
-];
-
-const data = [
-  {
-    host: 'et-demo-2-win4',
-    traffic: '213.4',
-    memoryTotal: 5830000000,
-    timestamp: '2022-09-26T12:45:07Z',
-    price: 290,
-  },
-  {
-    host: 'et-demo-2-win3',
-    traffic: '374',
-    memoryTotal: 3520000000,
-    timestamp: '2022-09-27T14:10:02Z',
-    price: 324,
-  },
-  {
-    host: 'et-demo-2-win1',
-    traffic: '625',
-    memoryTotal: 4670000000,
-    timestamp: '2022-09-27T13:10:02Z',
-    price: 343,
-  },
-  {
-    host: 'et-demo-2-win8',
-    traffic: '98.7',
-    memoryTotal: 5820000000,
-    timestamp: '2022-09-28T11:29:10Z',
-    price: 289,
-  },
-  {
-    host: 'dev-demo-5-macOS',
-    traffic: '164.6',
-    memoryTotal: 3460000000,
-    timestamp: '2022-09-28T10:22:56Z',
-    price: 193,
-  },
+      {
+        header: 'Operating System',
+        accessor: 'osType',
+        autoWidth: true,
+      }
 ];
 
 export const App = () => {
