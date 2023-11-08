@@ -1,18 +1,31 @@
-import { accessTokensApiTokensClient, monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environment-v2";
+import React from "react";
+import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput } from "@dynatrace/strato-components-preview";
+import { monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environment-v2";
 
-(async () => {
-    try {
+var data: {host: string, hostGroupName: string, ipAddress: string, monitoringMode: string, osType: string}[] = [];
+
+const config: Object = {
+  entitySelector: "type(HOST)",
+  from: "now-2h",
+  to: "now",
+  fields: "-fromRelationships, +properties.ipAddress, +properties.hostGroupName, +properties.monitoringMode, +properties.osType",
+}
+
+export const test = "this is the test";
+
+/* export const apiData = {
   
-        const config: Object = {
-          entitySelector: "type(HOST)",
-          from: "now-365d",
-          to: "now",
-        }
-  
-        const text = await monitoredEntitiesClient.getEntities(config);
-        //you can only use "await" within "async"
-        console.log(text);
-    } catch (e) {
-        // Deal with the fact the chain failed
-    }
-  })();
+  monitoredEntitiesClient.getEntities(config)
+  .then((response) => {
+    response.entities?.forEach(entity => {
+      console.log(entity.properties?.hostGroupName);
+      apiData.push({"host": String(entity.displayName), "hostGroupName": String(entity.properties?.hostGroupName), "ipAddress": String(entity.properties?.ipAddress), "monitoringMode": String(entity.properties?.monitoringMode), "osType": String(entity.properties?.osType)});
+    })
+  })
+  .catch((response) => {
+    console.log("error:", response)
+  })
+
+  return data;
+}
+*/

@@ -1,6 +1,6 @@
 import React from "react";
 import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput } from "@dynatrace/strato-components-preview";
-//import { getEntities } from "../functions/getEntities";
+import { test } from "../functions/getEntities";
 import { monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environment-v2";
 import { DataTable, TableColumn } from '@dynatrace/strato-components-preview/tables';
 
@@ -77,6 +77,7 @@ export const App = () => {
         <FormField label="">
           <TextInput placeholder="john.lagona@dtinside.com" />
         </FormField>
+        <Paragraph>{test}</Paragraph>
         <DataTable columns={cols} data={apiData}/>
       </Flex>
    </>
