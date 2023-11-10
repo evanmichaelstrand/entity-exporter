@@ -1,20 +1,28 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput } from "@dynatrace/strato-components-preview";
-import { test } from "../functions/getEntities";
+import { useEntitiesAPI } from "../functions/getEntities";
+//import { useEntitiesAPI } from "../functions/sample";
 import { monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environment-v2";
 import { DataTable, TableColumn } from '@dynatrace/strato-components-preview/tables';
+import { Response } from "dt-app";
 
+var data: {host: string, hostGroupName: string, ipAddress: string, monitoringMode: string, osType: string}[] = [];
 
-//TODO: Add scopes to api, then assign api to get entities call
+//const please = apiData;
 
-var count = 1;
+//console.log("this is the testfunc data", testfunc);
+
 
 //https://italonascimento.github.io/applying-a-timeout-to-your-promises/
 
-var apiData: {host: string, hostGroupName: string, ipAddress: string, monitoringMode: string, osType: string}[] = [];
+var theData: {host: string, hostGroupName: string, ipAddress: string, monitoringMode: string, osType: string}[] = [];
 
-apiData.push({"host": "test", "hostGroupName": "test group", "ipAddress": "100.100", "monitoringMode": "yes", "osType": "linux/windows"})
+for (let i=0; i<3; i++){
+  theData.push({"host": "test", "hostGroupName": "test group", "ipAddress": "100.100", "monitoringMode": "yes", "osType": "linux/windows"});
+}
 
+console.log("this is the mock data", theData);
 
 const config: Object = {
   entitySelector: "type(HOST)",
@@ -23,6 +31,7 @@ const config: Object = {
   fields: "-fromRelationships, +properties.ipAddress, +properties.hostGroupName, +properties.monitoringMode, +properties.osType",
 }
 
+/*
 monitoredEntitiesClient.getEntities(config)
 .then((response) => {
   response.entities?.forEach(entity => {
@@ -35,49 +44,56 @@ monitoredEntitiesClient.getEntities(config)
 })
 
 console.log(apiData)
+*/
 
 const cols: TableColumn[] = [
       {
         header: 'Host',
-        accessor: 'host',
+        accessor: 'displayName',
         minWidth: 150,
       },
       {
         header: 'Host Group',
-        accessor: 'hostGroupName',
+        accessor: 'properties.hostGroupName',
         minWidth: 200,
       },
       {
         header: 'IP Address',
-        accessor: 'ipAddress',
+        accessor: 'properties.ipAddress',
         autoWidth: true,
       },
       {
         header: 'Monitoring Mode',
-        accessor: 'monitoringMode',
+        accessor: 'properties.monitoringMode',
         autoWidth: true,
       },
       {
         header: 'Operating System',
-        accessor: 'osType',
+        accessor: 'properties.osType',
         autoWidth: true,
       }
 ];
+/*const somefunc = function(){
+  const [monitoredEntities, RVA, RVARAP] = useEntitiesAPI()
+  console.log(monitoredEntities)
+}
+
+som*/
 
 export const App = () => {
+  const apiData = useEntitiesAPI();
   return (
     <>
     <Flex flexDirection="column" alignItems="center" padding={32}>
 
         <Heading>Dynatrace Non-Named Biz Event Impact Analysis App</Heading>
         <Paragraph>
-        This app is designed to assist a new App developer better understand the basics of the application {count}
+        This app is designed to assist a new App developer better understand the basics of the application
         </Paragraph>
         <Paragraph>To run the app please enter an email address below</Paragraph>
         <FormField label="">
           <TextInput placeholder="john.lagona@dtinside.com" />
         </FormField>
-        <Paragraph>{test}</Paragraph>
         <DataTable columns={cols} data={apiData}/>
       </Flex>
    </>
