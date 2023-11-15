@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput } from "@dynatrace/strato-components-preview";
+import { config } from "../functions/apiConfig"
 import { monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environment-v2";
 
 //var data: {host: string, hostGroupName: string, ipAddress: string, monitoringMode: string, osType: string}[] = [];
@@ -8,26 +8,16 @@ import { monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environme
 export const useEntitiesAPI = () => {
   const [monitoredEntities, setMonitoredEntities] = useState<Object[]>([])
   useEffect(() => {
-      const abortController = new AbortController();
-      const abortSignal = abortController.signal;
-
-      const config: Object = {
-          entitySelector: "type(HOST)",
-          from: "now-365d",
-          to: "now",
-          fields: "-fromRelationships, +properties.ipAddress, +properties.hostGroupName, +properties.monitoringMode, +properties.osType",
-          abortSignal: abortSignal
-        }
-
+      
       monitoredEntitiesClient.getEntities(config)
       .then((response) => {
           if (response.entities) {
               setMonitoredEntities(response.entities)
           }
       })
-      return () => {
+      /*return () => {
         abortController.abort();
-      }
+      }*/
     }, [])
     return monitoredEntities
 }
