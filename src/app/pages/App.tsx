@@ -19,7 +19,11 @@ export const App = () => {
         <FormField label="">
           <TextInput placeholder="john.lagona@dtinside.com" />
         </FormField>
-        <DataTable columns={hostColumns} data={apiData}/>
+        <DataTable columns={hostColumns} data={apiData}>
+          <DataTable.Toolbar>
+            <DataTable.DownloadData />
+          </DataTable.Toolbar>
+        </DataTable>
       </Flex>
    </>
   );
