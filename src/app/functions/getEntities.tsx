@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { config } from "../functions/apiConfig"
+import { hostConfig } from "../functions/apiConfig"
 import { monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environment-v2";
 
 //var data: {host: string, hostGroupName: string, ipAddress: string, monitoringMode: string, osType: string}[] = [];
@@ -8,8 +8,7 @@ import { monitoredEntitiesClient } from "@dynatrace-sdk/client-classic-environme
 export const useEntitiesAPI = () => {
   const [monitoredEntities, setMonitoredEntities] = useState<Object[]>([])
   useEffect(() => {
-      
-      monitoredEntitiesClient.getEntities(config)
+      monitoredEntitiesClient.getEntities(hostConfig)
       .then((response) => {
           if (response.entities) {
               setMonitoredEntities(response.entities)

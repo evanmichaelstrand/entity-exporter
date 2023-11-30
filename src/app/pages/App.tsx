@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { units } from '@dynatrace-sdk/units';
 import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput } from "@dynatrace/strato-components-preview";
 import { useEntitiesAPI } from "../functions/getEntities";
 import { hostColumns } from "../components/table";
 import { DataTable} from '@dynatrace/strato-components-preview/tables';
+import type { TableColumn } from '@dynatrace/strato-components-preview/tables';
 import { Response } from "dt-app";
 
 export const App = () => {
@@ -19,7 +21,7 @@ export const App = () => {
         <FormField label="">
           <TextInput placeholder="john.lagona@dtinside.com" />
         </FormField>
-        <DataTable columns={hostColumns} data={apiData}>
+        <DataTable columns={hostColumns} data={apiData} sortable>
           <DataTable.Toolbar>
             <DataTable.DownloadData />
           </DataTable.Toolbar>
