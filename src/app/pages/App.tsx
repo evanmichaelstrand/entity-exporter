@@ -3,25 +3,27 @@ import { units } from '@dynatrace-sdk/units';
 import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput, Button } from "@dynatrace/strato-components-preview";
 import { useEntitiesAPI } from "../functions/getEntities";
 import { hostConfig } from "../functions/apiConfig"
-import { hostColumns } from "../components/table_shell";
 import { DataTable} from '@dynatrace/strato-components-preview/tables';
 import type { TableColumn } from '@dynatrace/strato-components-preview/tables';
 import { Header } from "../components/header";
-import GetTable from "../components/tables";
-import { Response } from "dt-app";
+import Host from "../components/Host";
+import { Route, Routes, Link} from "react-router-dom";
 
 export const App = () => {
-  
-  var entityType = "host";
 
   return ( 
     <>
        <Flex flexDirection="column" alignItems="center" padding={32}>
         <Header />
-        <GetTable entity="host"/>
+        <div className="App">
+          <Routes>
+            <Route path="/host" element={<Host />}></Route>
+          </Routes>
+        </div>
       </Flex>
     </>
 
    );
 };
 //<HostTable entity={entityType}/>
+//<GetTable entity="host"/> This works for getting table with button
