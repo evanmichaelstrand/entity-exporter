@@ -1,32 +1,27 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback, useRef, useState  } from "react";
 import { units } from '@dynatrace-sdk/units';
-import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput } from "@dynatrace/strato-components-preview";
+import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput, Button } from "@dynatrace/strato-components-preview";
 import { useEntitiesAPI } from "../functions/getEntities";
-import { hostColumns } from "../components/table";
+import { hostConfig } from "../functions/apiConfig"
+import { hostColumns } from "../components/table_shell";
 import { DataTable} from '@dynatrace/strato-components-preview/tables';
 import type { TableColumn } from '@dynatrace/strato-components-preview/tables';
+import { Header } from "../components/header";
+import GetTable from "../components/tables";
 import { Response } from "dt-app";
 
 export const App = () => {
-  const apiData = useEntitiesAPI();
-  return (
-    <>
-    <Flex flexDirection="column" alignItems="center" padding={32}>
+  
+  var entityType = "host";
 
-        <Heading>Entity Exporter</Heading>
-        <Paragraph>
-        This app is designed to assist a new App developer better understand the basics of the application
-        </Paragraph>
-        <Paragraph>To run the app please enter an email address below</Paragraph>
-        <FormField label="">
-          <TextInput placeholder="john.lagona@dtinside.com" />
-        </FormField>
-        <DataTable columns={hostColumns} data={apiData} sortable>
-          <DataTable.Toolbar>
-            <DataTable.DownloadData />
-          </DataTable.Toolbar>
-        </DataTable>
+  return ( 
+    <>
+       <Flex flexDirection="column" alignItems="center" padding={32}>
+        <Header />
+        <GetTable entity="host"/>
       </Flex>
-   </>
-  );
+    </>
+
+   );
 };
+//<HostTable entity={entityType}/>
