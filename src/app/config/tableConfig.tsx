@@ -40,3 +40,44 @@ export const hostColumns: TableColumn[] = [
       formatter: { input: units.data.bit, output: units.data.gigabit }
     }
 ];
+
+export const process_groupColumns: TableColumn[] = [
+    {
+      header: 'Process Group',
+      accessor: 'displayName',
+      ratioWidth: 2,
+    },
+    {
+      header: 'Main Technology',
+      accessor: 'properties.softwareTechnologies[0].type',
+      ratioWidth: 1,
+    },
+    {
+      header: 'Edition',
+      accessor: 'properties.softwareTechnologies[0].edition',
+      ratioWidth: 1,
+    },
+    {
+      header: 'Version',
+      accessor: 'properties.softwareTechnologies[0].version',
+      ratioWidth: 1,
+    }
+];
+
+export const applicationColumns: TableColumn[] = [
+  {
+    header: 'Application',
+    accessor: 'displayName',
+    ratioWidth: 2,
+  },
+  {
+    header: 'Type',
+    accessor: 'properties.applicationType',
+    ratioWidth: 1,
+  },
+  {
+    header: 'Rule pattern',
+    accessor: 'properties.ruleAppliedPattern',
+    ratioWidth: 1,
+  }
+];
