@@ -4,6 +4,7 @@ import { useEntitiesAPI } from "../functions/getEntities";
 import { DataTable} from '@dynatrace/strato-components-preview/tables';
 import { applicationColumns } from "../config/tableConfig";
 import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput, Button } from "@dynatrace/strato-components-preview";
+import { Header } from "../components/header";
 
 function Application(){
     

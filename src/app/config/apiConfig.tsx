@@ -17,6 +17,13 @@ export const hostConfig: Object = {
     abortSignal: abortSignal
   }
 
+  export const serviceConfig: Object = {
+    entitySelector: "type(SERVICE)",
+    from: "now-365d",
+    to: "now",
+    abortSignal: abortSignal
+  }
+
   export const applicationConfig: Object = {
     entitySelector: "type(APPLICATION)",
     from: "now-365d",
@@ -24,3 +31,4 @@ export const hostConfig: Object = {
     fields: "+properties.ruleAppliedPattern, +properties.applicationType",
     abortSignal: abortSignal
   }
+

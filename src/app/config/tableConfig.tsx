@@ -64,6 +64,14 @@ export const process_groupColumns: TableColumn[] = [
     }
 ];
 
+export const serviceColumns: TableColumn[] = [
+  {
+    header: 'Service',
+    accessor: 'displayName',
+    ratioWidth: 3,
+  }
+];
+
 export const applicationColumns: TableColumn[] = [
   {
     header: 'Application',

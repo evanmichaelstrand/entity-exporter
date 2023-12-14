@@ -2,17 +2,16 @@ import React, {useState} from "react";
 import { process_groupConfig } from "../config/apiConfig";
 import { useEntitiesAPI } from "../functions/getEntities";
 import { DataTable} from '@dynatrace/strato-components-preview/tables';
-import { process_groupColumns } from "../config/tableConfig";
+import { serviceColumns } from "../config/tableConfig";
 import { AppHeader, AppName, Page, Flex, Code, Heading, Paragraph, FormField, TextInput, Button } from "@dynatrace/strato-components-preview";
-import { Header } from "../components/header";
 
-function ProcessGroup(){
+function Service(){
     
     const apiData = useEntitiesAPI(process_groupConfig);
     return (
         <>   
-            <Heading>Process Groups</Heading>
-            <DataTable columns={process_groupColumns} data={apiData} sortable>
+            <Heading>Services</Heading>
+            <DataTable columns={serviceColumns} data={apiData} sortable>
                 <DataTable.Toolbar>
                     <DataTable.DownloadData />
                 </DataTable.Toolbar>
@@ -21,4 +20,4 @@ function ProcessGroup(){
     );
   };
   
-  export default ProcessGroup;
+  export default Service;
